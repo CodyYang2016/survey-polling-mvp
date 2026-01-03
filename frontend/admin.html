@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Survey App</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <div class="container">
+        <header class="admin-header">
+            <h1>📊 Admin Dashboard</h1>
+            <p>Manage and view all survey sessions</p>
+        </header>
+
+        <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+                <div class="export-buttons">
+                    <button id="export-json-btn" class="btn-primary">📥 Export JSON</button>
+                    <button id="export-csv-btn" class="btn-secondary">📥 Export CSV</button>
+                </div>
+                <button id="refresh-btn" class="btn-outline">🔄 Refresh</button>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" data-view="list">All Sessions</button>
+        </div>
+
+        <div id="content">
+            <div class="card">
+                <div class="loading-container">
+                    <div class="spinner"></div>
+                    <p class="mt-2">Loading sessions...</p>
+                </div>
+            </div>
+        </div>
+
+        <footer style="text-align: center; padding: 20px;">
+            <p><a href="index.html">← Back to Survey</a></p>
+        </footer>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>

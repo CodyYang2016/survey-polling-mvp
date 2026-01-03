@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survey - Share Your Opinion</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/survey.css">
+</head>
+<body>
+    <div class="container">
+        <header class="survey-header">
+            <h1>📋 Opinion Survey</h1>
+            <p>Your responses are anonymous and help us understand different perspectives</p>
+        </header>
+
+        <div id="progress-section" class="progress-section hidden">
+            <div class="progress-text">
+                <span id="progress-text">Question 1 of 5</span>
+                <span>🎯</span>
+            </div>
+            <div class="progress-bar">
+                <div id="progress-bar" class="progress-fill" style="width: 0%"></div>
+            </div>
+        </div>
+
+        <div id="chat-container" class="chat-container">
+        <div id="chat-log" class="chat-log">
+            <div class="loading-container">
+            <div class="spinner"></div>
+            <p class="mt-2">Loading survey...</p>
+            </div>
+        </div>
+
+        <div id="composer" class="composer hidden">
+            <div id="composer-input"></div>
+
+            <div class="composer-actions">
+            <button id="send-btn" class="btn-primary">BLAHHHHHHH</button>
+            <button id="prefer-not-btn" class="btn-outline">Prefer Not To Answer</button>
+            <button id="end-interview-btn" class="btn-danger">End Interview</button>
+            </div>
+        </div>
+        </div>
+
+
+        <footer style="text-align: center; padding: 20px; color: var(--text-secondary); font-size: 0.875rem;">
+            <p>This survey uses AI to ask relevant follow-up questions</p>
+            <p><a href="admin.html">Admin Dashboard</a></p>
+        </footer>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/survey.js"></script>
+</body>
+</html>

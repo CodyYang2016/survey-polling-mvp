@@ -1,0 +1,45 @@
+{
+  "survey": {
+    "id": "immigration-opinion-2025",
+    "name": "Immigration Policy Opinion Survey",
+    "description": "A brief survey to understand public opinion on immigration policy.",
+    "version": "1.0.0"
+  },
+  "questions": [
+    {
+      "id": "q1_immigration_sentiment",
+      "type": "single_choice",
+      "prompt": "How would you describe your overall view on immigration to the United States?",
+      "required": true,
+      "allow_prefer_not_to_answer": true,
+      "options": [
+        {"id": "very_positive", "text": "Very positive", "score": 5, "position": 0},
+        {"id": "somewhat_positive", "text": "Somewhat positive", "score": 4, "position": 1},
+        {"id": "neutral", "text": "Neutral / No strong opinion", "score": 3, "position": 2},
+        {"id": "somewhat_negative", "text": "Somewhat negative", "score": 2, "position": 3},
+        {"id": "very_negative", "text": "Very negative", "score": 1, "position": 4}
+      ]
+    },
+    {
+      "id": "q2_policy_preference",
+      "type": "single_choice",
+      "prompt": "Which of the following policy approaches do you most support?",
+      "required": true,
+      "allow_prefer_not_to_answer": true,
+      "options": [
+        {"id": "increase_legal", "text": "Increase legal immigration pathways", "position": 0},
+        {"id": "maintain_current", "text": "Maintain current immigration levels", "position": 1},
+        {"id": "reduce_all", "text": "Reduce both legal and illegal immigration", "position": 2},
+        {"id": "focus_enforcement", "text": "Focus primarily on border enforcement", "position": 3},
+        {"id": "path_to_citizenship", "text": "Create pathway to citizenship for undocumented immigrants", "position": 4}
+      ]
+    },
+    {
+      "id": "q3_reasoning",
+      "type": "free_text",
+      "prompt": "What factors most influence your view on immigration policy?",
+      "required": false,
+      "allow_prefer_not_to_answer": true
+    }
+  ]
+}

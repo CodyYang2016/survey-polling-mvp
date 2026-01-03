@@ -1,0 +1,23 @@
+⚠️  IMPORTANT: Large Files Not Included
+
+Due to script size limits, you need to copy these files from the chat:
+
+Required files (copy from chat messages above):
+1. backend/app/models.py (database models)
+2. backend/app/schemas.py (pydantic schemas)
+3. backend/app/services/llm_client.py
+4. backend/app/services/survey_service.py
+5. backend/app/services/session_service.py (largest file ~400 lines)
+6. backend/app/agents/prompts.py
+7. backend/app/agents/followup_agent.py
+8. backend/app/agents/summary_agent.py
+9. backend/app/api/sessions.py
+10. backend/app/api/admin.py
+11. backend/app/api/export.py
+12. backend/alembic/env.py
+13. backend/alembic/versions/001_initial_schema.py
+
+These files are in the chat conversation above.
+Copy each one into its respective location.
+
+After copying, the project will be complete and ready to run!
