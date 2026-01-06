@@ -36,12 +36,13 @@ class SurveyAPI {
     }
 
     // Session endpoints
-    async startSession(surveyId, anonymousId = null) {
+    async startSession(surveyId, respondentId = null) {
         return this.request('/sessions/start', {
             method: 'POST',
             body: JSON.stringify({
                 survey_id: surveyId,
-                anonymous_id: anonymousId
+                respondent_id: respondentId,
+                anonymous_id: respondentId
             })
         });
     }

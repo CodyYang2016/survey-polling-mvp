@@ -13,6 +13,11 @@
             <h1>📋 Opinion Survey</h1>
             <p>Your responses are anonymous and help us understand different perspectives</p>
         </header>
+        <!-- Respondent ID display (NEW) -->
+        <div id="respondent-info" class="respondent-info" style="display: none;">
+            <p>Your survey code: <strong><span id="respondent-id-value"></span></strong></p>
+            <p class="info-text">Save this code to access your responses later</p>
+        </div>
 
         <div id="progress-section" class="progress-section hidden">
             <div class="progress-text">
@@ -36,7 +41,7 @@
             <div id="composer-input"></div>
 
             <div class="composer-actions">
-            <button id="send-btn" class="btn-primary">BLAHHHHHHH</button>
+            <button id="send-btn" class="btn-primary">Submit</button>
             <button id="prefer-not-btn" class="btn-outline">Prefer Not To Answer</button>
             <button id="end-interview-btn" class="btn-danger">End Interview</button>
             </div>

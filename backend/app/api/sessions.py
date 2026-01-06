@@ -1,7 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, Request
 from sqlalchemy.orm import Session
 from uuid import UUID
-
 from app.database import get_db
 from app.schemas import (
     SessionStartRequest,
@@ -17,7 +16,6 @@ from app.utils.logger import setup_logger
 router = APIRouter(prefix="/sessions", tags=["sessions"])
 logger = setup_logger(__name__)
 
-
 @router.post("/start", response_model=SessionStartResponse)
 def start_session(
     request_data: SessionStartRequest,
@@ -30,9 +28,10 @@ def start_session(
         
         result = service.start_session(
             survey_id=request_data.survey_id,
-            anonymous_id=request_data.anonymous_id,
+            respondent_id=request_data.respondent_id,  # Updated from anonymous_id
+            anonymous_id=request_data.anonymous_id,     # Keep for backwards compatibility
             user_agent=req.headers.get("user-agent"),
-            ip_address=req.client.host
+            ip_address=req.client.host if req.client else None
         )
         
         return result
@@ -41,10 +40,9 @@ def start_session(
         logger.exception("Failed to start session")
         raise HTTPException(status_code=400, detail=str(e))
 
-
 @router.post("/{session_id}/answer", response_model=NextQuestionResponse)
 async def submit_answer(
-    session_id: UUID,
+    session_id: int,
     answer: AnswerRequest,
     db: Session = Depends(get_db)
 ):
@@ -58,21 +56,19 @@ async def submit_answer(
             answer_type=answer.answer_type,
             text=answer.text,
             selected_option_id=answer.selected_option_id,
-            parent_message_id=answer.parent_message_id
+            parent_message_id=getattr(answer, 'parent_message_id', None)
         )
         
         return result
     
     except Exception as e:
         logger.error(f"Failed to submit answer: {e}")
-        # Added too track error, remove potentially later
         logger.exception("Failed to submit answer")
         raise HTTPException(status_code=400, detail=str(e))
 
-
 @router.post("/{session_id}/end", response_model=SessionEndResponse)
 def end_session(
-    session_id: UUID,
+    session_id: int,
     request_data: SessionEndRequest,
     db: Session = Depends(get_db)
 ):
