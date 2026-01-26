@@ -82,12 +82,10 @@ def upgrade():
         sa.Column('completed_at', sa.DateTime(timezone=True), nullable=True),
         sa.Column('current_question_index', sa.Integer(), nullable=True),
         sa.Column('status', sa.String(), nullable=True),
+        sa.Column('summary', sa.Text(), nullable=True),  # ADD THIS LINE
         sa.ForeignKeyConstraint(['survey_version_id'], ['survey_versions.id'], ondelete='CASCADE'),
         sa.PrimaryKeyConstraint('id')
     )
-    op.create_index(op.f('ix_sessions_id'), 'sessions', ['id'], unique=False)
-    op.create_index(op.f('ix_sessions_respondent_id'), 'sessions', ['respondent_id'], unique=False)
-
     # Create responses table WITH respondent_id
     op.create_table(
         'responses',
@@ -109,9 +107,10 @@ def upgrade():
         'conversation_turns',
         sa.Column('id', sa.Integer(), nullable=False),
         sa.Column('session_id', sa.Integer(), nullable=False),
+        sa.Column('parent_message_id', postgresql.UUID(as_uuid=True), nullable=True),  # ADD THIS LINE
         sa.Column('respondent_id', sa.String(), nullable=False),
         sa.Column('speaker', sa.String(), nullable=False),
-        sa.Column('message', sa.Text(), nullable=False),
+        sa.Column('message_text', sa.Text(), nullable=False),  # RENAME from 'message'
         sa.Column('timestamp', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=True),
         sa.ForeignKeyConstraint(['session_id'], ['sessions.id'], ondelete='CASCADE'),
         sa.PrimaryKeyConstraint('id')
@@ -160,6 +159,8 @@ def upgrade():
         sa.ForeignKeyConstraint(['session_id'], ['sessions.id'], ondelete='CASCADE'),
         sa.PrimaryKeyConstraint('id')
     )
+    op.create_index(op.f('ix_sessions_id'), 'sessions', ['id'], unique=False)
+    op.create_index(op.f('ix_sessions_respondent_id'), 'sessions', ['respondent_id'], unique=False)
 
 
 def downgrade():

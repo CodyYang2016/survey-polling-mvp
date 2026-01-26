@@ -1,6 +1,8 @@
 from typing import Dict, Any, List, Optional
 import json
 from sqlalchemy.orm import Session
+from anthropic import APIError, RateLimitError, APITimeoutError
+
 
 from app.services.llm_client import LLMClient
 from app.agents.prompts import (
@@ -104,4 +106,11 @@ class FollowUpAgent:
             }
         except Exception as e:
             logger.error(f"FollowUpAgent error: {e}")
-            raise
+            # Instead of raising, return a safe fallback
+            return {
+                "action": "move_on",
+                "followup_question": None,
+                "reason": "System temporarily unavailable",
+                "confidence": "low",
+                "probe_count": probe_count
+            }

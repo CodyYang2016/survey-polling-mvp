@@ -237,6 +237,7 @@ class NextQuestionResponse(BaseModel):
     message_type: str  # 'survey_question', 'follow_up_question', 'completed'
     question: Optional[QuestionResponse] = None
     question_text: Optional[str] = None  # For follow-up questions
+    parent_message_id: Optional[UUID] = None  # ADD THIS LINE
     summary: Optional[Dict[str, Any]] = None  # For completion
 
 

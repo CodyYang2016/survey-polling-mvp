@@ -1,6 +1,8 @@
 from typing import Dict, Any, List
 import json
 from sqlalchemy.orm import Session
+from anthropic import APIError, RateLimitError, APITimeoutError
+
 
 from app.services.llm_client import LLMClient
 from app.agents.prompts import (
@@ -65,4 +67,11 @@ class SummaryAgent:
             return {
                 "summary": current_summary,
                 "key_themes": []
+                }
+        except APIError as e:
+            logger.error(f"API error in SummaryAgent: {e.status_code} - {e.message}")
+            return {
+                "summary": current_summary,
+                "key_themes": [],
+                "error": "temporary_issue"  # Frontend can show a gentle message
             }

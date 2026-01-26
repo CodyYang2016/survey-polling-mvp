@@ -69,7 +69,6 @@ class QuestionOption(Base):
 
 
 class Session(Base):
-    """Survey response session"""
     __tablename__ = "sessions"
     
     id = Column(Integer, primary_key=True, index=True)
@@ -78,13 +77,26 @@ class Session(Base):
     started_at = Column(DateTime(timezone=True), server_default=func.now())
     completed_at = Column(DateTime(timezone=True), nullable=True)
     current_question_index = Column(Integer, default=0)
-    status = Column(String, default="in_progress")  # 'in_progress', 'completed', 'abandoned'
+    status = Column(String, default="in_progress")
+    summary = Column(Text, nullable=True)  # ADD THIS LINE
     
+    # ... relationships ...
     survey_version = relationship("SurveyVersion", back_populates="sessions")
     responses = relationship("Response", back_populates="session", cascade="all, delete-orphan")
     conversation_history = relationship("ConversationTurn", back_populates="session", cascade="all, delete-orphan")
 
-
+class ConversationTurn(Base):
+    __tablename__ = "conversation_turns"
+    
+    id = Column(Integer, primary_key=True, index=True)
+    session_id = Column(Integer, ForeignKey("sessions.id", ondelete="CASCADE"), nullable=False)
+    parent_message_id = Column(UUID(as_uuid=True), nullable=True)  # ADD THIS LINE
+    respondent_id = Column(String, nullable=False, index=True)
+    speaker = Column(String, nullable=False)
+    message_text = Column(Text, nullable=False)  # RENAME from 'message'
+    timestamp = Column(DateTime(timezone=True), server_default=func.now())
+    
+    session = relationship("Session", back_populates="conversation_history")
 class Response(Base):
     """Individual question response"""
     __tablename__ = "responses"
@@ -98,20 +110,6 @@ class Response(Base):
     
     session = relationship("Session", back_populates="responses")
     question = relationship("Question", back_populates="responses")
-
-
-class ConversationTurn(Base):
-    """Conversation history for follow-up questions"""
-    __tablename__ = "conversation_turns"
-    
-    id = Column(Integer, primary_key=True, index=True)
-    session_id = Column(Integer, ForeignKey("sessions.id", ondelete="CASCADE"), nullable=False)
-    respondent_id = Column(String, nullable=False, index=True)
-    speaker = Column(String, nullable=False)  # 'user' or 'assistant'
-    message = Column(Text, nullable=False)
-    timestamp = Column(DateTime(timezone=True), server_default=func.now())
-    
-    session = relationship("Session", back_populates="conversation_history")
 
 
 class SessionMessage(Base):
