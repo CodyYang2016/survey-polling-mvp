@@ -19,7 +19,7 @@ class LLMClient:
         )
         self.pricing = {
             "claude-sonnet-4-20250514": {"input": 3.00, "output": 15.00},
-            "claude-haiku-3-5-20250514": {"input": 0.80, "output": 4.00},
+            "claude-3-5-haiku-20241022": {"input": 0.80, "output": 4.00},  # Change this line
         }
     
     async def complete(
@@ -35,6 +35,8 @@ class LLMClient:
         max_retries: int = None
     ) -> Dict[str, Any]:
         """Call Anthropic API and log to database."""
+        logger.info(f"🔵 REAL LLM CLIENT called: model={model}, agent={agent_type}")  # ADD THIS LINE
+
         if max_retries is None:
             max_retries = settings.api_max_retries
             

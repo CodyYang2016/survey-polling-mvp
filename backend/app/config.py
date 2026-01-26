@@ -17,7 +17,7 @@ class Settings(BaseSettings):
 
     # Mock LLM Mode
     use_mock_llm: bool = Field(
-        default=True,
+        default=False,
         validation_alias="USE_MOCK_LLM",
     )
 
@@ -42,3 +42,12 @@ class Settings(BaseSettings):
 
 
 settings = Settings()
+
+
+settings = Settings()
+
+# DEBUG - Remove after fixing
+print("="*60)
+print(f"USE_MOCK_LLM setting: {settings.use_mock_llm}")
+print(f"ANTHROPIC_API_KEY set: {bool(settings.anthropic_api_key and settings.anthropic_api_key != 'not-needed-for-mock')}")
+print("="*60)

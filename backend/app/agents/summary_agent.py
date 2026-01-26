@@ -40,7 +40,7 @@ class SummaryAgent:
         
         try:
             response = await self.llm_client.complete(
-                model="claude-haiku-3-5-20250514",
+                model="claude-3-haiku-20240307",
                 system=SUMMARY_AGENT_SYSTEM_PROMPT,
                 messages=[{"role": "user", "content": user_message}],
                 max_tokens=200,

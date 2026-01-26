@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey, Boolean, JSON
+from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey, Boolean, JSON, Float
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
@@ -147,10 +147,19 @@ class ModelCall(Base):
     
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     session_id = Column(Integer, ForeignKey("sessions.id", ondelete="CASCADE"), nullable=False)
+    agent_type = Column(String, nullable=True)  # ADD THIS
     model_name = Column(String, nullable=False)
+    provider = Column(String, nullable=True)  # ADD THIS
+    prompt_text = Column(Text, nullable=True)  # ADD THIS
+    system_prompt = Column(Text, nullable=True)  # ADD THIS
+    temperature = Column(Float, nullable=True)  # ADD THIS (needs import Float from sqlalchemy)
+    max_tokens = Column(Integer, nullable=True)  # ADD THIS
+    response_text = Column(Text, nullable=True)  # ADD THIS
+    finish_reason = Column(String, nullable=True)  # ADD THIS
     input_tokens = Column(Integer)
     output_tokens = Column(Integer)
-    cost_usd = Column(Integer)  # Store as cents to avoid float precision issues
+    latency_ms = Column(Integer, nullable=True)  # ADD THIS
+    cost_usd = Column(Integer)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     
     session = relationship("Session", foreign_keys=[session_id])

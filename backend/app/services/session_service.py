@@ -125,7 +125,7 @@ class SessionService:
                     session_id=session_id,
                     respondent_id=session.respondent_id,
                     speaker="user",
-                    message=text  # ✅ CORRECT field name
+                    message_text=text  # 
                 )
                 self.db.add(turn)
                 self.db.commit()
@@ -169,7 +169,7 @@ class SessionService:
                         user_answer=text or selected_option_text or "",
                         selected_option_text=selected_option_text,
                         conversation_history=[
-                            {"role": t.speaker, "content": t.message}  # ✅ CORRECT field
+                            {"role": t.speaker, "content": t.message_text}  # ✅ 
                             for t in conversation_history
                         ],
                         probe_count=probe_count,
@@ -189,7 +189,7 @@ class SessionService:
                                 session_id=session_id,
                                 respondent_id=session.respondent_id,
                                 speaker="assistant",
-                                message=followup_question  # ✅ CORRECT field
+                                message_text=followup_question  
                             )
                             self.db.add(turn)
                             self.db.commit()
@@ -205,8 +205,8 @@ class SessionService:
                 
                 # Update summary (save to SessionSummary table, not Session.summary)
                 try:
-                    followup_q = [t.message for t in conversation_history if t.speaker == "assistant"]
-                    followup_a = [t.message for t in conversation_history if t.speaker == "user"]
+                    followup_q = [t.message_text for t in conversation_history if t.speaker == "assistant"]
+                    followup_a = [t.message_text for t in conversation_history if t.speaker == "user"]
                     
                     summary_result = await self.summary_agent.update_summary(
                         current_summary="",  # Get from SessionSummary if exists
