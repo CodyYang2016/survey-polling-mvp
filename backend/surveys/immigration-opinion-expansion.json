@@ -1,0 +1,126 @@
+[
+  {
+    "id": "q4_economic_impact",
+    "type": "single_choice",
+    "prompt": "Overall, what effect do you think immigration has on the U.S. economy?",
+    "required": true,
+    "allow_prefer_not_to_answer": true,
+    "options": [
+      {"id": "very_positive", "text": "Very positive", "position": 0},
+      {"id": "somewhat_positive", "text": "Somewhat positive", "position": 1},
+      {"id": "no_effect", "text": "No significant effect", "position": 2},
+      {"id": "somewhat_negative", "text": "Somewhat negative", "position": 3},
+      {"id": "very_negative", "text": "Very negative", "position": 4}
+    ]
+  },
+  {
+    "id": "q5_job_market",
+    "type": "single_choice",
+    "prompt": "Do you think immigration mostly helps or hurts job opportunities for people already living in the United States?",
+    "required": true,
+    "allow_prefer_not_to_answer": true,
+    "options": [
+      {"id": "helps_more", "text": "Helps more than it hurts", "position": 0},
+      {"id": "hurts_more", "text": "Hurts more than it helps", "position": 1},
+      {"id": "both_equal", "text": "Helps and hurts about equally", "position": 2},
+      {"id": "neither", "text": "Has little effect either way", "position": 3}
+    ]
+  },
+  {
+    "id": "q6_border_security_priority",
+    "type": "single_choice",
+    "prompt": "How important should border security be compared to other immigration priorities?",
+    "required": true,
+    "allow_prefer_not_to_answer": true,
+    "options": [
+      {"id": "top_priority", "text": "Top priority", "position": 0},
+      {"id": "high_priority", "text": "High priority, but not the only one", "position": 1},
+      {"id": "moderate_priority", "text": "Moderate priority", "position": 2},
+      {"id": "low_priority", "text": "Low priority", "position": 3}
+    ]
+  },
+  {
+    "id": "q7_humanitarian_responsibility",
+    "type": "single_choice",
+    "prompt": "To what extent do you believe the United States has a responsibility to accept refugees and asylum seekers?",
+    "required": true,
+    "allow_prefer_not_to_answer": true,
+    "options": [
+      {"id": "strong_responsibility", "text": "Strong responsibility", "position": 0},
+      {"id": "some_responsibility", "text": "Some responsibility", "position": 1},
+      {"id": "little_responsibility", "text": "Little responsibility", "position": 2},
+      {"id": "no_responsibility", "text": "No responsibility", "position": 3}
+    ]
+  },
+  {
+    "id": "q8_local_community_impact",
+    "type": "single_choice",
+    "prompt": "How has immigration affected your local community?",
+    "required": false,
+    "allow_prefer_not_to_answer": true,
+    "options": [
+      {"id": "mostly_positive", "text": "Mostly positive", "position": 0},
+      {"id": "somewhat_positive", "text": "Somewhat positive", "position": 1},
+      {"id": "no_change", "text": "No noticeable change", "position": 2},
+      {"id": "somewhat_negative", "text": "Somewhat negative", "position": 3},
+      {"id": "mostly_negative", "text": "Mostly negative", "position": 4}
+    ]
+  },
+  {
+    "id": "q9_enforcement_vs_services",
+    "type": "single_choice",
+    "prompt": "Which approach should the federal government prioritize more when addressing immigration?",
+    "required": true,
+    "allow_prefer_not_to_answer": true,
+    "options": [
+      {"id": "enforcement", "text": "Law enforcement and border control", "position": 0},
+      {"id": "services", "text": "Legal pathways and integration services", "position": 1},
+      {"id": "balanced", "text": "A balanced mix of both", "position": 2}
+    ]
+  },
+  {
+    "id": "q10_cultural_impact",
+    "type": "single_choice",
+    "prompt": "How do you think immigration affects American culture?",
+    "required": true,
+    "allow_prefer_not_to_answer": true,
+    "options": [
+      {"id": "enriches", "text": "Enriches American culture", "position": 0},
+      {"id": "slightly_enriches", "text": "Somewhat enriches American culture", "position": 1},
+      {"id": "no_effect", "text": "Has little effect", "position": 2},
+      {"id": "undermines", "text": "Undermines American culture", "position": 3}
+    ]
+  },
+  {
+    "id": "q11_federal_vs_state_role",
+    "type": "single_choice",
+    "prompt": "Who should have more authority over immigration policy?",
+    "required": true,
+    "allow_prefer_not_to_answer": true,
+    "options": [
+      {"id": "federal", "text": "The federal government", "position": 0},
+      {"id": "state", "text": "State and local governments", "position": 1},
+      {"id": "shared", "text": "Shared authority", "position": 2}
+    ]
+  },
+  {
+    "id": "q12_values_tradeoff",
+    "type": "free_text",
+    "prompt": "When you think about immigration policy, what values matter most to you (for example, fairness, security, economic opportunity, humanitarian concern)?",
+    "required": false,
+    "allow_prefer_not_to_answer": true
+  },
+  {
+    "id": "q13_policy_confidence",
+    "type": "single_choice",
+    "prompt": "How confident are you that the U.S. government can effectively manage immigration?",
+    "required": true,
+    "allow_prefer_not_to_answer": true,
+    "options": [
+      {"id": "very_confident", "text": "Very confident", "position": 0},
+      {"id": "somewhat_confident", "text": "Somewhat confident", "position": 1},
+      {"id": "not_very_confident", "text": "Not very confident", "position": 2},
+      {"id": "not_confident_at_all", "text": "Not confident at all", "position": 3}
+    ]
+  }
+]
