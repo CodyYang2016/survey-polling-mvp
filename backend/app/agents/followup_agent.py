@@ -85,12 +85,10 @@ class FollowUpAgent:
             text = self._extract_text(response)
             result = json.loads(text)
 
-
-            result["probe_count"] = probe_count
             
             logger.info(
                 f"FollowUpAgent decision: action={result['action']}, "
-                f"confidence={result['confidence']}, probe_count={probe_count}"
+                f"confidence={result['confidence']}, probe_count={result['probe_count']}"
             )
             
             return result

@@ -107,8 +107,8 @@ def render_followup_prompt(
     if conversation_history:
         history_lines = []
         for turn in conversation_history:
-            history_lines.append(f"Follow-up Q: {turn['question']}")
-            history_lines.append(f"Response: {turn['answer']}")
+            speaker = "Follow-up Q" if turn['role'] == "assistant" else "Response"
+            history_lines.append(f"{speaker}: {turn['content']}")
         history_text = "PREVIOUS FOLLOW-UP EXCHANGE:\n" + "\n".join(history_lines)
     
     prompt = f"""BASELINE SURVEY QUESTION:

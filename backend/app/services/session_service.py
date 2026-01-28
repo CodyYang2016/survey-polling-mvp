@@ -145,8 +145,26 @@ class SessionService:
                 self.db.add(response)
                 self.db.commit()
             
-            # Check if we should ask a follow-up using the LLM agent
-            if question and text and answer_type != "prefer_not_to_answer":
+        # Check if we should ask a follow-up using the LLM agent
+        if question and answer_type != "prefer_not_to_answer":
+            # Get selected option text if applicable FIRST
+            selected_option_text = None
+            if selected_option_id and question.question_type == "single_choice":
+                # Need to load options relationship
+                from sqlalchemy.orm import joinedload
+                question_with_options = self.db.query(Question).options(
+                    joinedload(Question.options)
+                ).filter(Question.id == question_id).first()
+                
+                if question_with_options:
+                    option = next((opt for opt in question_with_options.options if str(opt.id) == selected_option_id), None)
+                    if option:
+                        selected_option_text = option.option_text
+            
+            # Now check if we have any answer (text OR selected option)
+            user_answer = text or selected_option_text
+            
+            if user_answer:  # Only proceed if we have some answer
                 # Get conversation history for this question
                 conversation_history = self.db.query(ConversationTurn).filter(
                     ConversationTurn.session_id == session_id
@@ -154,22 +172,15 @@ class SessionService:
                 
                 probe_count = len([t for t in conversation_history if t.speaker == "assistant"])
                 
-                # Get selected option text if applicable
-                selected_option_text = None
-                if selected_option_id and question.question_type == "single_choice":
-                    option = next((opt for opt in question.options if str(opt.id) == selected_option_id), None)
-                    if option:
-                        selected_option_text = option.option_text
-                
                 # Call the follow-up agent
                 try:
                     followup_decision = await self.followup_agent.should_ask_followup(
                         question_text=question.question_text,
                         question_type=question.question_type,
-                        user_answer=text or selected_option_text or "",
+                        user_answer=user_answer,
                         selected_option_text=selected_option_text,
                         conversation_history=[
-                            {"role": t.speaker, "content": t.message_text}  # ✅ 
+                            {"role": t.speaker, "content": t.message_text}
                             for t in conversation_history
                         ],
                         probe_count=probe_count,
@@ -189,14 +200,14 @@ class SessionService:
                                 session_id=session_id,
                                 respondent_id=session.respondent_id,
                                 speaker="assistant",
-                                message_text=followup_question  
+                                message_text=followup_question
                             )
                             self.db.add(turn)
                             self.db.commit()
                             
                             return NextQuestionResponse(
                                 message_type="follow_up_question",
-                                question_text=followup_question  # ✅ Frontend expects this
+                                question_text=followup_question
                             )
                 
                 except Exception as e:
@@ -211,7 +222,7 @@ class SessionService:
                     summary_result = await self.summary_agent.update_summary(
                         current_summary="",  # Get from SessionSummary if exists
                         question_text=question.question_text,
-                        user_answer=text or selected_option_text or "",
+                        user_answer=user_answer,
                         followup_questions=followup_q,
                         followup_answers=followup_a,
                         session_id=str(session_id),
@@ -239,7 +250,8 @@ class SessionService:
                 except Exception as e:
                     logger.error(f"Summary agent error: {e}")
             
-            # Move to next question
+        # Move to next question
+        if answer_type != "follow_up_answer":
             session.current_question_index += 1
         
         # Get next question

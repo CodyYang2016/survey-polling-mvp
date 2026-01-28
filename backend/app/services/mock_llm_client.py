@@ -18,7 +18,7 @@ class MockLLMClient:
     def __init__(self):
         self.pricing = {
             "claude-sonnet-4-20250514": {"input": 0.00, "output": 0.00},
-            "claude-haiku-3-5-20250514": {"input": 0.00, "output": 0.00},
+            "claude-3-haiku-20240307": {"input": 0.00, "output": 0.00},
         }
         logger.warning("="*60)
         logger.warning("🎭 MOCK LLM MODE ENABLED")
