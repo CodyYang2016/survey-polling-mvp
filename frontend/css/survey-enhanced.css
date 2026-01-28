@@ -1,0 +1,400 @@
+/* ===============================
+   ENHANCED SURVEY STYLES
+   Phase 2: UX Polish
+   =============================== */
+
+/* Input Feedback Messages */
+.input-feedback {
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.input-feedback.warning {
+    color: #f59e0b;
+    background-color: #fef3c7;
+    border-left: 3px solid #f59e0b;
+}
+
+.input-feedback.success {
+    color: #10b981;
+    background-color: #d1fae5;
+    border-left: 3px solid #10b981;
+}
+
+.input-feedback.error {
+    color: #ef4444;
+    background-color: #fee2e2;
+    border-left: 3px solid #ef4444;
+    animation: shake 0.3s;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+/* Modal Overlay (for confirmations and errors) */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    max-width: 450px;
+    width: 90%;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-content h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    color: #1f2937;
+}
+
+.modal-content p {
+    margin-bottom: 1.5rem;
+    color: #6b7280;
+    line-height: 1.6;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: flex-end;
+}
+
+.modal-actions button {
+    flex: 1;
+}
+
+/* Error Modal Specific Styles */
+.error-modal {
+    text-align: center;
+}
+
+.error-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.error-modal h3 {
+    color: #dc2626;
+}
+
+/* Enhanced Loading States */
+.spinner {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 2px solid #f3f4f6;
+    border-top-color: currentColor;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Loading Container (initial page load) */
+.loading-container {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: #6b7280;
+}
+
+.loading-container .spinner {
+    width: 40px;
+    height: 40px;
+    border-width: 3px;
+    margin: 0 auto;
+}
+
+/* Improved Button States */
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+button:not(:disabled):hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+button:not(:disabled):active {
+    transform: translateY(0);
+}
+
+/* Textarea Enhancements */
+textarea {
+    font-family: inherit;
+    font-size: 1rem;
+    line-height: 1.6;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Radio Options - Better Touch Targets */
+.radio-option {
+    padding: 1rem;
+    min-height: 48px; /* Better touch target for mobile */
+    display: flex;
+    align-items: center;
+}
+
+.radio-option input[type="radio"] {
+    min-width: 20px;
+    min-height: 20px;
+}
+
+/* ===============================
+   MOBILE RESPONSIVENESS
+   =============================== */
+
+@media (max-width: 768px) {
+    /* Container Adjustments */
+    .container {
+        padding: 1rem;
+        max-width: 100%;
+    }
+
+    /* Header */
+    .survey-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .survey-header p {
+        font-size: 0.875rem;
+    }
+
+    /* Chat Container */
+    .chat-container {
+        min-height: 400px;
+    }
+
+    .chat-log {
+        padding: 1rem;
+    }
+
+    /* Messages */
+    .line {
+        margin-bottom: 1rem;
+    }
+
+    .role {
+        font-size: 0.875rem;
+    }
+
+    .text {
+        font-size: 0.95rem;
+    }
+
+    /* Composer */
+    .composer {
+        padding: 1rem;
+    }
+
+    .composer-actions {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .composer-actions button {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* Radio Options - Larger Touch Targets */
+    .radio-option {
+        padding: 1.25rem;
+        margin-bottom: 0.5rem;
+    }
+
+    /* Modal */
+    .modal-content {
+        padding: 1.5rem;
+        max-width: 95%;
+    }
+
+    .modal-actions {
+        flex-direction: column;
+    }
+
+    .modal-actions button {
+        width: 100%;
+    }
+
+    /* Progress Bar */
+    .progress-text {
+        font-size: 0.875rem;
+    }
+}
+
+/* Small Mobile Devices */
+@media (max-width: 480px) {
+    .survey-header h1 {
+        font-size: 1.25rem;
+    }
+
+    textarea {
+        font-size: 16px; /* Prevents zoom on iOS */
+    }
+
+    .btn-primary,
+    .btn-outline,
+    .btn-danger {
+        padding: 0.875rem 1.25rem;
+        font-size: 1rem;
+    }
+}
+
+/* Landscape Mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+    .chat-container {
+        min-height: 300px;
+    }
+
+    .modal-content {
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+}
+
+/* ===============================
+   ACCESSIBILITY ENHANCEMENTS
+   =============================== */
+
+/* Focus Indicators */
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+/* High Contrast Support */
+@media (prefers-contrast: high) {
+    .input-feedback.warning {
+        border-width: 2px;
+    }
+
+    .input-feedback.success {
+        border-width: 2px;
+    }
+
+    .input-feedback.error {
+        border-width: 2px;
+    }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .composer,
+    .composer-actions,
+    .modal-overlay {
+        display: none !important;
+    }
+
+    .chat-log {
+        border: none;
+    }
+}
+
+/* ===============================
+   SMOOTH TRANSITIONS
+   =============================== */
+
+/* Smooth state changes */
+.composer,
+.progress-section,
+.input-feedback {
+    transition: all 0.3s ease;
+}
+
+/* Smooth color transitions */
+button {
+    transition: background-color 0.2s, transform 0.1s, box-shadow 0.2s;
+}
+
+/* Smooth radio selection */
+.radio-option {
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.radio-option.selected {
+    background-color: #eff6ff;
+    border-color: #3b82f6;
+}
+
+/* ===============================
+   MODAL CENTERING FIX (OVERRIDE)
+   =============================== */
+
+/* Force modal to center - high priority */
+.modal-overlay {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 9999 !important;
+}
+
+.modal-content {
+    position: relative !important;
+    margin: auto !important;
+}
+
+
+
