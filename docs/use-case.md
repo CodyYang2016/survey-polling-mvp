@@ -1,3 +1,4 @@
+```mermaid
 graph TB
     subgraph "Polling Survey System"
         subgraph "Survey Respondent Actions"
